@@ -8,11 +8,12 @@ const fsP = require("fs/promises");
  */
 async function cat(path) {
   let contents;
+  console.log("path=", path);
   try {
     contents = await fsP.readFile(path, "utf8");
 
   } catch (err) {
-    console.log(err.code);
+    console.log(err);
     process.exit(1);
   }
   return contents;
@@ -24,6 +25,7 @@ async function cat(path) {
  */
 async function webCat(url) {
   let html;
+  console.log("url=", url);
   try {
     const response = await fetch(url);
     html = await response.text();
@@ -91,4 +93,7 @@ async function main() {
 
 main();
 
-
+module.exports = {
+  cat,
+  webCat,
+};
